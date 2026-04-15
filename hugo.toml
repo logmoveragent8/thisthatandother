@@ -1,0 +1,17 @@
+baseURL = "https://thisthatandother.com/"
+languageCode = "en-us"
+title = "This, That & Other"
+theme = "hugo-PaperMod"
+
+[params]
+  title = "This, That & Other"
+  description = "Thoughts on things"
+  keywords = ["blog", "personal"]
+  author = "You"
+  footerMessage = "© 2026 This, That & Other"
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+enableRobotsTXT = true
+enableGitInfo = false

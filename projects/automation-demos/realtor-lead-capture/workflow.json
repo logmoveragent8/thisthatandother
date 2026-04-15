@@ -1,0 +1,70 @@
+{
+  "name": "Realtor Lead Capture",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "realtor-lead-capture",
+        "responseMode": "responseNode"
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetId": "YOUR_SHEET_ID",
+        "tableRange": "A:H",
+        "values": {
+          "date": "={{ $json.timestamp }}",
+          "name": "={{ $json.name }}",
+          "phone": "={{ $json.phone }}",
+          "email": "={{ $json.email }}",
+          "property_type": "={{ $json.property_type }}",
+          "budget": "={{ $json.budget }}",
+          "source": "={{ $json.source }}",
+          "status": "New"
+        }
+      },
+      "id": "google-sheets",
+      "name": "Add to Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "your-email@gmail.com",
+        "toEmail": "={{ $json.email }}",
+        "subject": "Thanks for your interest in {{ $json.property_type }}!",
+        "text": "Hi {{ $json.name }},\n\nThanks for reaching out! I'm excited to help you find your perfect property.\n\nI'll be in touch within 24 hours with some great options that match your criteria.\n\nBest regards,\n[Your Name]\n[Realty Company]"
+      },
+      "id": "auto-reply",
+      "name": "Send Auto-Reply",
+      "type": "n8n-nodes-base.gmail",
+      "position": [650, 200]
+    },
+    {
+      "parameters": {
+        "chatId": "YOUR_CHAT_ID",
+        "text": "🏠 NEW REAL ESTATE LEAD!\n\nName: {{ $json.name }}\nPhone: {{ $json.phone }}\nEmail: {{ $json.email }}\nProperty: {{ $json.property_type }}\nBudget: {{ $json.budget }}\nSource: {{ $json.source }}"
+      },
+      "id": "telegram-alert",
+      "name": "Telegram Alert",
+      "type": "n8n-nodes-base.telegram",
+      "position": [650, 400]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{"node": "Add to Google Sheets", "type": "main", "index": 0}]]
+    },
+    "Add to Google Sheets": {
+      "main": [[
+        {"node": "Send Auto-Reply", "type": "main", "index": 0},
+        {"node": "Telegram Alert", "type": "main", "index": 0}
+      ]]
+    }
+  }
+}

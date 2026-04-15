@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "jobs": [
+    {
+      "id": "nightly-review",
+      "name": "nightly-review",
+      "cron": "0 1 * * *",
+      "systemEvent": "nightly-review",
+      "tz": "America/Chicago",
+      "description": "Nightly memory review",
+      "disabled": false
+    }
+  ]
+}

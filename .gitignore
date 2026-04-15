@@ -1,0 +1,44 @@
+# OpenClaw Workspace Git Ignore
+
+# Sensitive files - NEVER commit these
+openclaw.json
+*.key
+*.pem
+*.crt
+*.env
+.env*
+secrets*
+credentials*
+
+# Runtime files
+node_modules/
+*.log
+*.tmp
+*.temp
+
+# Memory files - TRACK THESE
+!memory/
+memory/*.tmp
+memory/*.bak
+
+# Workspace files - TRACK THESE
+!AGENTS.md
+!SOUL.md
+!USER.md
+!MEMORY.md
+!IDENTITY.md
+!TOOLS.md
+!HEARTBEAT.md
+
+# Project files
+!projects/
+!areas/
+!resources/
+
+# Keep this file tracked
+!.gitignore
+
+# Keep selected operational assets tracked
+!TOOLCHAIN_CHECKLIST.md
+!scripts/
+!scripts/bootstrap_codex_vault.sh
