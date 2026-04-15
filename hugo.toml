@@ -2,6 +2,7 @@ baseURL = "https://thisthatandother.com/"
 languageCode = "en-us"
 title = "This, That & Other"
 theme = "hugo-PaperMod"
+publishDir = "."
 
 [params]
   title = "This, That & Other"
