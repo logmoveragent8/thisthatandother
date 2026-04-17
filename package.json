@@ -1,0 +1,11 @@
+{
+  "name": "thisthatandother",
+  "version": "1.0.0",
+  "description": "This, That & Other blog",
+  "scripts": {
+    "build": "hugo --minify",
+    "prebuild": "curl -L https://github.com/gohugoio/hugo/releases/download/v0.140.3/hugo_extended_0.140.3_linux-amd64.tar.gz | tar -xz && chmod +x hugo"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
